@@ -2,9 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import Http404
-from .models import Materiais
+from .models import Historico_material, Materiais
 from .models import Pessoas
 from .models import Movimentacao
+from .models import Historico_material
 
 
 def home(request):
@@ -26,4 +27,10 @@ def movimentacoes(request):
     movimentacoes = Movimentacao.objects.all()
     return render(request, 'movimentacao.html', {
         'movimentacoes': movimentacoes
+    })
+
+def historico(request):
+    historico = Historico_material.objects.all()
+    return render(request, 'historico.html', {
+        'historico': historico
     })

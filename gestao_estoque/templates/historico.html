@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Histórico</h1>
+
+    <table>
+        <thead>
+            <th>ID Lote</th>
+            <th>ID Material</th>
+            <th>Quantidade</th>
+            <th>Localização</th>
+            <th>Criado em</th>
+        </thead>
+        <tbody>
+            {% for historico_item in historico %}
+            <tr>
+                <td>{{ historico_item.id_lote }}</td>
+                <td>{{ historico_item.id_material }}</td>
+                <td>{{ historico_item.quantidade }}</td>
+                <td>{{ historico_item.localizacao }}</td>
+                <td>{{ historico_item.criado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
