@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Materiais</h1>
+
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>ID</th>
+            <th>Unidade</th>
+            <th>Tipo</th>
+            <th>Criado em</th>
+        </thead>
+        <tbody>
+            {% for material in materiais %}
+            <tr>
+                <td>{{ material.nome | capfirst }}</td>
+                <td>{{ material.id_material }}</td>
+                <td>{{ material.unidade }}</td>
+                <td>{{material.tipo}}</td>
+                <td>{{material.criado}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
