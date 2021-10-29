@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Funcionários</h1>
+
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>ID</th>
+            <th>Funcao</th>
+            <th>Criado em</th>
+        </thead>
+        <tbody>
+            {% for funcionario in funcionarios %}
+            <tr>
+                <td>{{ funcionario.nome_completo | capfirst }}</td>
+                <td>{{ funcionario.id_pessoa }}</td>
+                <td>{{ funcionario.funcao }}</td>
+                <td>{{funcionario.criado}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
