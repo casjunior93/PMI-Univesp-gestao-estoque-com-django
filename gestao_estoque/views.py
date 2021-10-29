@@ -15,7 +15,7 @@ def materiais(request):
         'materiais': materiais
     })
 
-def materiais(request):
+def funcionarios(request):
     funcionarios = Pessoas.objects.all()
     return render(request, 'funcionarios.html', {
         'funcionarios': funcionarios
