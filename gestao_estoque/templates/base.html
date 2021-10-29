@@ -1,0 +1,32 @@
+{% load static %}
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Estoque</title>
+    <link rel="stylesheet" id="reset-style-css" href="{% static 'reset.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" id="ample-style-css" href="{% static 'style.css' %}" type="text/css" media="all">
+</head>
+
+<body class="wide">
+    <div id="page" class="hfeed site">
+        <header>
+            <div class="header">
+                <h1>Header do Site</h1>
+            </div>
+        </header>
+        <main>
+            <div class="conteudo">
+                {% block content %} {% endblock %}
+            </div>
+        </main>
+        <footer>
+            <div class="footer">
+                <h1>Este é o nosso Footer</h1>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

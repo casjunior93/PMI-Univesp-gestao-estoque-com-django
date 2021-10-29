@@ -1,0 +1,23 @@
+body {
+    font-size: 20px;
+}
+
+.header {
+    background-color: #eeeeee;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.conteudo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.footer {
+    background-color: #eeeeee;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
