@@ -20,6 +20,6 @@ from gestao_estoque import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
-    path('materiais/', views.materiais,name='materiais')
+    path('materiais/', views.materiais,name='materiais'),
     path('funcionarios/', views.funcionarios,name='funcionarios')
 ]
