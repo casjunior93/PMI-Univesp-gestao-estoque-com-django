@@ -9,6 +9,10 @@ class Materiais(models.Model):
     tipo = models.CharField(max_length=1, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
 
+    #alterando a exibição no painel do Admin
+    def __str__(self):
+        return self.nome
+
 class Lotes(models.Model):
     TIPOS = [('0','Material'), ('1', 'EPI')]
     id_lote = models.AutoField(primary_key=True)
