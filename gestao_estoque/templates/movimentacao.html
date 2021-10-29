@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Funcionários</h1>
+
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>ID Funcionario</th>
+            <th>ID Lote</th>
+            <th>ID Material</th>
+            <th>Quantidade</th>
+            <th>Localização</th>
+            <th>Criado em</th>
+        </thead>
+        <tbody>
+            {% for movimentacao in movimentacoes %}
+            <tr>
+                <td>{{ movimentacao.id_movimentacao | capfirst }}</td>
+                <td>{{ movimentacao.id_pessoa }}</td>
+                <td>{{ movimentacao.id_lote }}</td>
+                <td>{{ movimentacao.id_material }}</td>
+                <td>{{ movimentacao.quantidade }}</td>
+                <td>{{ movimentacao.localizacao }}</td>
+                <td>{{ movimentacao.criado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

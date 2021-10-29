@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import Http404
 from .models import Materiais
 from .models import Pessoas
+from .models import Movimentacao
 
 
 def home(request):
@@ -19,4 +20,10 @@ def funcionarios(request):
     funcionarios = Pessoas.objects.all()
     return render(request, 'funcionarios.html', {
         'funcionarios': funcionarios
+    })
+
+def movimentacoes(request):
+    movimentacoes = Movimentacao.objects.all()
+    return render(request, 'movimentacao.html', {
+        'movimentacoes': movimentacoes
     })
