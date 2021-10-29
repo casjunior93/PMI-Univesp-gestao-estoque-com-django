@@ -20,6 +20,9 @@ class Lotes(models.Model):
     validade_ca = models.DateTimeField(null=True)
     tipo = models.CharField(max_length=1, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
+    #alterando a exibição no painel do Admin
+    def __str__(self):
+        return self.id_lote
 
 class Situacao_material(models.Model):
     id_lote = models.ForeignKey('Lotes', on_delete=models.CASCADE, blank=True)
@@ -43,6 +46,9 @@ class Pessoas(models.Model):
     funcao = models.CharField(max_length=30, null=True)
     criado = models.DateTimeField(auto_now_add=True)
     atualizado = models.DateTimeField(auto_now = True)
+    #alterando a exibição no painel do Admin
+    def __str__(self):
+        return self.nome_completo
 
 class Movimentacao(models.Model):
     id_movimentacao = models.AutoField(primary_key=True)
