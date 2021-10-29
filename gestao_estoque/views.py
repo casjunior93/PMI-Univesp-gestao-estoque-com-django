@@ -34,3 +34,9 @@ def historico(request):
     return render(request, 'historico.html', {
         'historico': historico
     })
+
+def lotes(request):
+    lotes = Historico_material.objects.all()
+    return render(request, 'lotes.html', {
+        'lotes': lotes
+    })
