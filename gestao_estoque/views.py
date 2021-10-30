@@ -7,6 +7,7 @@ from .models import Pessoas
 from .models import Movimentacao
 from .models import Historico_material
 from .models import Lotes
+from .models import Situacao_material
 
 
 def home(request):
@@ -40,4 +41,10 @@ def lotes(request):
     lotes = Lotes.objects.all()
     return render(request, 'lotes.html', {
         'lotes': lotes
+    })
+
+def situacao(request):
+    situacao = Situacao_material.objects.all()
+    return render(request, 'situacao_material.html', {
+        'situacao': situacao
     })

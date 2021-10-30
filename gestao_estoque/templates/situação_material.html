@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Situação dos Materiais</h1>
+
+    <table>
+        <thead>
+            <th>ID Lote</th>
+            <th>ID Material</th>
+            <th>Quantidade</th>
+            <th>Localização</th>
+            <th>Criado em</th>
+        </thead>
+        <tbody>
+            {% for situacao_item in situacao %}
+            <tr>
+                <td>{{ situacao_item.id_lote }}</td>
+                <td>{{ situacao_item.id_material }}</td>
+                <td>{{ situacao_item.quantidade }}</td>
+                <td>{{ situacao_item.localizacao }}</td>
+                <td>{{ situacao_item.criado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
