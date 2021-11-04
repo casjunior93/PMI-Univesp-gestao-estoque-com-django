@@ -4,11 +4,11 @@ from django.db import models
 
 
 class Materiais(models.Model):
-    TIPOS = [('0', 'Material'), ('1', 'EPI')]
+    TIPOS = [('Material', 'Material'), ('EPI', 'EPI')]
     id_material = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
     unidade = models.SmallIntegerField(default=0)
-    tipo = models.CharField(max_length=1, choices=TIPOS, blank=True)
+    tipo = models.CharField(max_length=8, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
 
     # alterando a exibição no painel do Admin
@@ -17,15 +17,15 @@ class Materiais(models.Model):
 
 
 class Lotes(models.Model):
-    TIPOS = [('0', 'Material'), ('1', 'EPI')]
+    TIPOS = [('Material', 'Material'), ('EPI', 'EPI')]
     id_lote = models.AutoField(primary_key=True)
     controle = models.CharField(max_length=30, null=True)
     validade_ca = models.DateField(null=True)
-    tipo = models.CharField(max_length=1, choices=TIPOS, blank=True)
+    tipo = models.CharField(max_length=8, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
     quantidade = models.FloatField(default=0)
     material = models.ForeignKey(
-        'Materiais', on_delete=models.CASCADE, blank=True)
+        'Materiais', on_delete=models.CASCADE, blank=True, default='2')
     # alterando a exibição no painel do Admin
 
     def __str__(self):
