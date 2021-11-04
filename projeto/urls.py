@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gestao_estoque import views
+from gestao_estoque.views import FuncionarioCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('movimentacoes/', views.movimentacoes,name='movimentacoes'),
     path('historico/', views.historico,name='historico'),
     path('lotes/', views.lotes,name='lotes'),
-    path('situacao_material/', views.situacao,name='situacao')
+    path('situacao_material/', views.situacao,name='situacao'),
+    path('funcionario/cadastrar/', FuncionarioCreateView.as_view()),
 ]

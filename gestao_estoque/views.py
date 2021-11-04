@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 from django.http import Http404
@@ -48,3 +50,9 @@ def situacao(request):
     return render(request, 'situacao_material.html', {
         'situacao': situacao
     })
+
+class FuncionarioCreateView(CreateView):
+  template_name = 'cadastro_funcionario.html'
+  model = Pessoas
+  fields = ['nome_completo', 'funcao']
+  success_url = reverse_lazy("funcionarios")

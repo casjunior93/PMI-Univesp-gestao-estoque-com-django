@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Funcionários</h1>
+    <form method="post" id="cadastro-funcionario">
+        {% csrf_token %} {{ form }}
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+{% endblock content %}
