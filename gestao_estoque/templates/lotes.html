@@ -5,6 +5,7 @@
     <table>
         <thead>
             <th>ID Lote</th>
+            <th>Material</th>
             <th>Controle</th>
             <th>Validade CA</th>
             <th>Tipo</th>
@@ -15,6 +16,7 @@
             {% for lote in lotes %}
             <tr>
                 <td>{{ lote.id_lote | capfirst }}</td>
+                <td>{{ lote.id_material }}</td>
                 <td>{{ lote.controle }}</td>
                 <td>{{ lote.validade_ca }}</td>
                 <td>{{ lote.tipo }}</td>

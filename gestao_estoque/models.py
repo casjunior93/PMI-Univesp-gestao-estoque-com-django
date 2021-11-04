@@ -24,7 +24,7 @@ class Lotes(models.Model):
     tipo = models.CharField(max_length=8, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
     quantidade = models.FloatField(default=0)
-    material = models.ForeignKey(
+    id_material = models.ForeignKey(
         'Materiais', on_delete=models.CASCADE, blank=True, null=True)
     # alterando a exibição no painel do Admin
 
