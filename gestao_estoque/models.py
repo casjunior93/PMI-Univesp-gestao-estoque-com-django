@@ -26,8 +26,8 @@ class Lotes(models.Model):
     quantidade = models.FloatField(default=0)
     id_material = models.ForeignKey(
         'Materiais', on_delete=models.CASCADE, blank=True, null=True)
+    
     # alterando a exibição no painel do Admin
-
     def __str__(self):
         return self.controle
 
