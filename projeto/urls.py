@@ -16,16 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gestao_estoque import views
-from gestao_estoque.views import FuncionarioCreateView
+from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home,name='home'),
-    path('materiais/', views.materiais,name='materiais'),
-    path('funcionarios/', views.funcionarios,name='funcionarios'),
-    path('movimentacoes/', views.movimentacoes,name='movimentacoes'),
-    path('historico/', views.historico,name='historico'),
-    path('lotes/', views.lotes,name='lotes'),
-    path('situacao_material/', views.situacao,name='situacao'),
-    path('funcionario/cadastrar/', FuncionarioCreateView.as_view()),
+    path('', views.home, name='home'),
+    path('materiais/', views.materiais, name='materiais'),
+    path('funcionarios/', views.funcionarios, name='funcionarios'),
+    path('movimentacoes/', views.movimentacoes, name='movimentacoes'),
+    path('historico/', views.historico, name='historico'),
+    path('lotes/', views.lotes, name='lotes'),
+    path('situacao_material/', views.situacao, name='situacao'),
+    path('funcionarios/cadastrar/', FuncionarioCreateView.as_view()),
+    path('materiais/cadastrar/', MaterialCreateView.as_view()),
+    path('lotes/cadastrar/', LoteCreateView.as_view()),
+    path('movimentacoes/cadastrar/', MovimentacaoCreateView.as_view()),
 ]
