@@ -25,7 +25,7 @@ class Lotes(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     quantidade = models.FloatField(default=0)
     material = models.ForeignKey(
-        'Materiais', on_delete=models.CASCADE, blank=True)
+        'Materiais', on_delete=models.CASCADE, blank=True, null=True)
     # alterando a exibição no painel do Admin
 
     def __str__(self):
