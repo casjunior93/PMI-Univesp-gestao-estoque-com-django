@@ -20,7 +20,7 @@ class Lotes(models.Model):
     TIPOS = [('Material', 'Material'), ('EPI', 'EPI')]
     id_lote = models.AutoField(primary_key=True)
     controle = models.CharField(max_length=30, null=True)
-    validade_ca = models.DateField(null=True)
+    validade_ca = models.DateField( blank=False, null=True)
     tipo = models.CharField(max_length=8, choices=TIPOS, blank=True)
     criado = models.DateTimeField(auto_now_add=True)
     quantidade = models.FloatField(default=0)

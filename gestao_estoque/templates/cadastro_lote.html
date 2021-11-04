@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Cadastro</h1>
+    <form method="post" id="cadastro">
+        {% csrf_token %}
+        <div class="input">
+            <label for="{{ form.id_material.id_for_label }}">Nome</label> {{ form.id_material }}
+        </div>
+        <div class="input">
+            <label for="{{ form.controle.id_for_label }}">Controle</label> {{ form.controle }}
+        </div>
+        <div class="input">
+            <label for="{{ form.validade_ca.id_for_label }}">Validade CA</label> {{ form.validade_ca }}
+        </div>
+        <div class="input">
+            <label for="{{ form.tipo.id_for_label }}">Tipo</label> {{ form.tipo }}
+        </div>
+        <div class="input">
+            <label for="{{ form.quantidade.id_for_label }}">Quantidade</label> {{ form.quantidade }}
+        </div>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+{% endblock content %}

@@ -75,7 +75,7 @@ class MaterialCreateView(CreateView):
 
 
 class LoteCreateView(CreateView):
-    template_name = 'cadastro.html'
+    template_name = 'cadastro_lote.html'
     model = Lotes
     fields = ['id_material', 'controle', 'validade_ca', 'tipo', 'quantidade']
     success_url = reverse_lazy("lotes")
