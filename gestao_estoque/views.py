@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.forms.widgets import SelectDateWidget
 
 # Create your views here.
 from django.http import Http404
@@ -53,13 +54,13 @@ def lotes(request):
 
 def situacao(request):
     situacao = Situacao_material.objects.all()
-    return render(request, 'situacao_material.html', {
+    return render(request, 'situacao-material.html', {
         'situacao': situacao
     })
 
 
 class FuncionarioCreateView(CreateView):
-    template_name = 'cadastro.html'
+    template_name = 'cadastro-funcionario.html'
     model = Pessoas
     fields = ['nome_completo', 'funcao']
     success_url = reverse_lazy("funcionarios")
@@ -67,7 +68,7 @@ class FuncionarioCreateView(CreateView):
 
 
 class MaterialCreateView(CreateView):
-    template_name = 'cadastro.html'
+    template_name = 'cadastro-material.html'
     model = Materiais
     fields = ['nome', 'unidade', 'tipo']
     success_url = reverse_lazy("materiais")
@@ -75,15 +76,20 @@ class MaterialCreateView(CreateView):
 
 
 class LoteCreateView(CreateView):
-    template_name = 'cadastro_lote.html'
+    template_name = 'cadastro-lote.html'
     model = Lotes
     fields = ['id_material', 'controle', 'validade_ca', 'tipo', 'quantidade']
     success_url = reverse_lazy("lotes")
     template_name_suffix = '_cadastro_lote'
+    def get_form(self):
+        '''add date picker in forms'''
+        form = super(LoteCreateView, self).get_form()
+        form.fields['validade_ca'].widget = SelectDateWidget()
+        return form
 
 
 class MovimentacaoCreateView(CreateView):
-    template_name = 'cadastro.html'
+    template_name = 'cadastro-movimentacao.html'
     model = Movimentacao
     fields = ['id_pessoa', 'id_lote', 'id_material', 'quantidade', 'localizacao']
     success_url = reverse_lazy("movimentacoes")
