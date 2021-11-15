@@ -9,6 +9,7 @@
             <th>Unidade</th>
             <th>Tipo</th>
             <th>Criado em</th>
+            <th>Editar</th>
         </thead>
         <tbody>
             {% for material in materiais %}
@@ -18,6 +19,7 @@
                 <td>{{ material.unidade }}</td>
                 <td>{{material.tipo}}</td>
                 <td>{{material.criado}}</td>
+                <td><a href="/materiais/editar/{{ material.id_material }}">Editar</a></td>
             </tr>
             {% endfor %}
         </tbody>

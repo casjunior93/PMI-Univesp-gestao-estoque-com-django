@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gestao_estoque import views
-from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView
+from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView, FuncionarioUpdateView, MaterialUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,6 @@ urlpatterns = [
     path('materiais/cadastrar/', MaterialCreateView.as_view()),
     path('lotes/cadastrar/', LoteCreateView.as_view()),
     path('movimentacoes/cadastrar/', MovimentacaoCreateView.as_view()),
+    path('funcionarios/editar/<id>', FuncionarioUpdateView.as_view()),
+    path('materiais/editar/<id>', MaterialUpdateView.as_view())
 ]

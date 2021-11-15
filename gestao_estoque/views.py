@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.forms.widgets import SelectDateWidget
+from .forms import MaterialForm, MovimentacaoForm
+from django.db.models import F
 
 # Create your views here.
 from django.http import Http404
@@ -70,10 +73,8 @@ class FuncionarioCreateView(CreateView):
 class MaterialCreateView(CreateView):
     template_name = 'cadastro-material.html'
     model = Materiais
-    fields = ['nome', 'unidade', 'tipo']
+    form_class = MaterialForm
     success_url = reverse_lazy("materiais")
-    template_name_suffix = '_cadastro_material'
-
 
 class LoteCreateView(CreateView):
     template_name = 'cadastro-lote.html'
@@ -91,6 +92,80 @@ class LoteCreateView(CreateView):
 class MovimentacaoCreateView(CreateView):
     template_name = 'cadastro-movimentacao.html'
     model = Movimentacao
-    fields = ['id_pessoa', 'id_lote', 'id_material', 'quantidade', 'localizacao']
+    fields = '__all__'
     success_url = reverse_lazy("movimentacoes")
     template_name_suffix = '_cadastro_movimentacao'
+
+    """ def post(self, *args, **kwargs):
+        lote_id = self.request.POST.get('id_lote')
+        obj = Lotes.objects.get(id_lote=lote_id)
+        Lotes.objects.filter(pk=obj.id_lote).update(quantidade=F('quantidade') + self.request.POST.get('quantidade')) """
+    def form_valid(self, form):
+        if form.is_valid():
+            """ Salva movimentação e desconta na quantidade do lote """
+            lote_controle = form.cleaned_data['id_lote']
+            obj = Lotes.objects.get(controle=lote_controle)
+            Lotes.objects.filter(pk=obj.id_lote).update(quantidade=F('quantidade') - form.cleaned_data['quantidade'])
+            nova_movimentacao = form.save()
+            """ Adiciona Historico """
+            h = Historico_material(id_lote=form.cleaned_data['id_lote'], id_material=form.cleaned_data['id_material'], quantidade=form.cleaned_data['quantidade'], localizacao=form.cleaned_data['localizacao'])
+            h.save()
+            return redirect('movimentacoes')
+
+class MaterialUpdateView(UpdateView):
+    template_name = 'atualiza.html'
+    model = Materiais
+    fields = '__all__'
+    context_object_name = 'material'
+
+    def get_object(self, queryset=None):
+      material = None
+
+      # Se você utilizar o debug, verá que os 
+      # campos {pk} e {slug} estão presente em self.kwargs
+      id = self.kwargs.get(self.pk_url_kwarg)
+      slug = self.kwargs.get(self.slug_url_kwarg)
+
+      if id is not None:
+        # Busca o funcionario apartir do id
+        material = Materiais.objects.filter(id=id).first()
+
+      elif slug is not None:        
+        # Pega o campo slug do Model
+        campo_slug = self.get_slug_field()
+
+        # Busca o funcionario apartir do slug
+        material = Materiais.objects.filter(**{campo_slug: slug}).first()
+
+      # Retorna o objeto encontrado
+      return material
+    success_url = reverse_lazy("materiais")
+
+class FuncionarioUpdateView(UpdateView):
+    template_name = "atualiza.html"
+    model = Pessoas
+    fields = '__all__'
+    context_object_name = 'funcionario'
+
+    def get_object(self, queryset=None):
+      funcionario = None
+
+      # Se você utilizar o debug, verá que os 
+      # campos {pk} e {slug} estão presente em self.kwargs
+      id = self.kwargs.get(self.pk_url_kwarg)
+      slug = self.kwargs.get(self.slug_url_kwarg)
+
+      if id is not None:
+        # Busca o funcionario apartir do id
+        funcionario = Pessoas.objects.filter(id=id).first()
+
+      elif slug is not None:        
+        # Pega o campo slug do Model
+        campo_slug = self.get_slug_field()
+
+        # Busca o funcionario apartir do slug
+        funcionario = Pessoas.objects.filter(**{campo_slug: slug}).first()
+
+      # Retorna o objeto encontrado
+      return funcionario
+    success_url = reverse_lazy("funcionarios")
