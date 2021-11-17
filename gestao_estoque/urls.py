@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from gestao_estoque import views
-from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView, FuncionarioUpdateView, MaterialUpdateView
+from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView, FuncionarioUpdateView, MaterialUpdateView, MaterialDeleteView, FuncionarioDeleteView
 
 app_name = 'gestao_estoque'
 
@@ -33,6 +33,8 @@ urlpatterns = [
     path('materiais/cadastrar/', MaterialCreateView.as_view()),
     path('lotes/cadastrar/', LoteCreateView.as_view()),
     path('movimentacoes/cadastrar/', MovimentacaoCreateView.as_view()),
-    path('funcionarios/editar/<id>', FuncionarioUpdateView.as_view()),
-    path('materiais/editar/<int:pk>', MaterialUpdateView.as_view(), name='atualiza_material')
+    path('funcionarios/editar/<int:pk>', FuncionarioUpdateView.as_view()),
+    path('materiais/editar/<int:pk>', MaterialUpdateView.as_view(), name='atualiza_material'),
+    path('materiais/excluir/<int:pk>', MaterialDeleteView.as_view()),
+    path('funcionarios/excluir/<int:pk>', FuncionarioDeleteView.as_view())
 ]

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% load static %} {% load widget_tweaks %} {% block content %}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h1>Atualização de Funcionário</h1>
+    <form method="post">
+        <!-- Não se esqueça dessa tag -->
+        {% csrf_token %}
+
+        <!-- Nome -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nome</span>
+            </div>
+            {% render_field form.nome_completo class+="form-control" %}
+        </div>
+
+        <!-- Função -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Função</span>
+            </div>
+            {% render_field form.funcao class+="form-control" %}
+        </div>
+
+        <button class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+{% endblock content %}

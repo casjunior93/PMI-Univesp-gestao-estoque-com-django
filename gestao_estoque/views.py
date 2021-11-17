@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.forms.widgets import SelectDateWidget
 from .forms import MaterialForm, MovimentacaoForm, FuncionarioForm, MaterialUpdateForm
@@ -66,14 +66,14 @@ class FuncionarioCreateView(CreateView):
     template_name = 'cadastro-funcionario.html'
     model = Pessoas
     form_class = FuncionarioForm
-    success_url = reverse_lazy("funcionarios")
+    success_url = reverse_lazy("gestao_estoque:funcionarios")
 
 
 class MaterialCreateView(CreateView):
     template_name = 'cadastro-material.html'
     model = Materiais
     form_class = MaterialForm
-    success_url = reverse_lazy("materiais")
+    success_url = reverse_lazy(("gestao_estoque:materiais"))
 
 class LoteCreateView(CreateView):
     template_name = 'cadastro-lote.html'
@@ -103,13 +103,13 @@ class MovimentacaoCreateView(CreateView):
             """ Adiciona Historico """
             h = Historico_material(id_lote=form.cleaned_data['id_lote'], id_material=form.cleaned_data['id_material'], quantidade=form.cleaned_data['quantidade'], localizacao=form.cleaned_data['localizacao'])
             h.save()
-            return redirect('movimentacoes')
+            return redirect('gestao_estoque:movimentacoes')
 
 class MaterialUpdateView(UpdateView):
     template_name = 'atualiza.html'
     model = Materiais
     form_class = MaterialUpdateForm
-    success_url = reverse_lazy("materiais")
+    success_url = reverse_lazy("gestao_estoque:materiais")
 
     def get_object(self, queryset=None):
       material = None
@@ -134,11 +134,11 @@ class MaterialUpdateView(UpdateView):
       return material
 
 class FuncionarioUpdateView(UpdateView):
-    template_name = "atualiza.html"
+    template_name = "atualiza-funcionario.html"
     model = Pessoas
     fields = '__all__'
     context_object_name = 'funcionario'
-    success_url = reverse_lazy("materiais")
+    success_url = reverse_lazy("gestao_estoque:funcionarios")
 
     def get_object(self, queryset=None):
       funcionario = None
@@ -150,7 +150,7 @@ class FuncionarioUpdateView(UpdateView):
 
       if id is not None:
         # Busca o funcionario apartir do id
-        funcionario = Pessoas.objects.filter(id=id).first()
+        funcionario = Pessoas.objects.filter(id_pessoa=id).first()
 
       elif slug is not None:        
         # Pega o campo slug do Model
@@ -161,3 +161,15 @@ class FuncionarioUpdateView(UpdateView):
 
       # Retorna o objeto encontrado
       return funcionario
+
+class MaterialDeleteView(DeleteView):
+    template_name = "excluir.html"
+    model = Materiais
+    context_object_name = 'material'
+    success_url = reverse_lazy("gestao_estoque:materiais")
+
+class FuncionarioDeleteView(DeleteView):
+    template_name = "excluir-funcionario.html"
+    model = Pessoas
+    context_object_name = 'funcionario'
+    success_url = reverse_lazy("gestao_estoque:funcionarios")

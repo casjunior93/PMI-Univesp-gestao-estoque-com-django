@@ -2,14 +2,15 @@
 <div>
     <h1>Materiais</h1>
 
-    <table class="table">
-        <thead class="thead-dark">
+    <table class="table table-bordered">
+        <thead class="thead-light">
             <th>Nome</th>
             <th>ID</th>
             <th>Unidade</th>
             <th>Tipo</th>
             <th>Criado em</th>
             <th>Editar</th>
+            <th>Excluir</th>
         </thead>
         <tbody>
             {% for material in materiais %}
@@ -20,6 +21,7 @@
                 <td>{{material.tipo}}</td>
                 <td>{{material.criado}}</td>
                 <td><a href="/materiais/editar/{{ material.id_material }}">Editar</a></td>
+                <td><a href="/materiais/excluir/{{ material.id_material }}">Excluir</a></td>
             </tr>
             {% endfor %}
         </tbody>
