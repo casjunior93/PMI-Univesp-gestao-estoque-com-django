@@ -20,7 +20,7 @@ from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, Lote
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('',  views.materiais, name='materiais'),
     path('materiais/', views.materiais, name='materiais'),
     path('funcionarios/', views.funcionarios, name='funcionarios'),
     path('movimentacoes/', views.movimentacoes, name='movimentacoes'),

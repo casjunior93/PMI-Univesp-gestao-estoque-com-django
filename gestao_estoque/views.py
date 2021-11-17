@@ -96,9 +96,9 @@ class MovimentacaoCreateView(CreateView):
     def form_valid(self, form):
         if form.is_valid():
             """ Salva movimentação e desconta na quantidade do lote """
-            lote_controle = form.cleaned_data['id_lote']
-            obj = Lotes.objects.get(controle=lote_controle)
-            Lotes.objects.filter(pk=obj.id_lote).update(quantidade=F('quantidade') - form.cleaned_data['quantidade'])
+            nome_material = form.cleaned_data['id_material']
+            obj = Materiais.objects.get(nome=nome_material)
+            Materiais.objects.filter(pk=obj.id_material).update(unidade=F('unidade') - form.cleaned_data['quantidade'])
             nova_movimentacao = form.save()
             """ Adiciona Historico """
             h = Historico_material(id_lote=form.cleaned_data['id_lote'], id_material=form.cleaned_data['id_material'], quantidade=form.cleaned_data['quantidade'], localizacao=form.cleaned_data['localizacao'])

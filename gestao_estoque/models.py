@@ -68,7 +68,7 @@ class Movimentacao(models.Model):
     id_movimentacao = models.AutoField(primary_key=True)
     id_pessoa = models.ForeignKey(
         'Pessoas', on_delete=models.CASCADE, blank=True)
-    id_lote = models.ForeignKey('Lotes', on_delete=models.CASCADE, blank=True)
+    id_lote = models.ForeignKey('Lotes', on_delete=models.CASCADE, blank=True, default='Único')
     id_material = models.ForeignKey(
         'Materiais', on_delete=models.CASCADE, blank=True)
     quantidade = models.FloatField()
