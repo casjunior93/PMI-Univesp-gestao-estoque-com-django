@@ -20,4 +20,4 @@ class MovimentacaoForm(forms.ModelForm):
 class MaterialUpdateForm(forms.ModelForm):
     class Meta:
         model = Materiais
-        fields = ('unidade',)
+        fields = '__all__'

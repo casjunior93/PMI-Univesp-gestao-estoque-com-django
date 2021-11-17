@@ -1,12 +1,36 @@
-{% extends 'base.html' %} {% block content %}
-<div>
-    <h1>Editar '{{post.title}}'</h1>
-    <div>
-        <form action="." method="POST">
-            {% csrf_token %} {{ form.as_p }}
-            <input type="submit" class="btn btn-primary" value="Editar">
-        </form>
+{% extends "base.html" %} {% load static %} {% load widget_tweaks %} {% block content %}
 
-    </div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h1>Atualização de Material</h1>
+    <form method="post">
+        <!-- Não se esqueça dessa tag -->
+        {% csrf_token %}
+
+        <!-- Nome -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nome</span>
+            </div>
+            {% render_field form.nome class+="form-control" %}
+        </div>
+
+        <!-- Unidades -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Unidades</span>
+            </div>
+            {% render_field form.unidade class+="form-control" %}
+        </div>
+
+        <!--Tipo -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Tipo</span>
+            </div>
+            {% render_field form.tipo class+="form-control" %}
+        </div>
+
+        <button class="btn btn-primary">Enviar</button>
+    </form>
 </div>
 {% endblock content %}

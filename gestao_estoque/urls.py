@@ -19,7 +19,20 @@ from django.urls.conf import include
 from gestao_estoque import views
 from gestao_estoque.views import FuncionarioCreateView, MaterialCreateView, LoteCreateView, MovimentacaoCreateView, FuncionarioUpdateView, MaterialUpdateView
 
+app_name = 'gestao_estoque'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('gestao_estoque.urls', namespace='gestao_estoque')),
+    path('',  views.materiais, name='materiais'),
+    path('materiais/', views.materiais, name='materiais'),
+    path('funcionarios/', views.funcionarios, name='funcionarios'),
+    path('movimentacoes/', views.movimentacoes, name='movimentacoes'),
+    path('historico/', views.historico, name='historico'),
+    path('lotes/', views.lotes, name='lotes'),
+    path('situacao_material/', views.situacao, name='situacao'),
+    path('funcionarios/cadastrar/', FuncionarioCreateView.as_view()),
+    path('materiais/cadastrar/', MaterialCreateView.as_view()),
+    path('lotes/cadastrar/', LoteCreateView.as_view()),
+    path('movimentacoes/cadastrar/', MovimentacaoCreateView.as_view()),
+    path('funcionarios/editar/<id>', FuncionarioUpdateView.as_view()),
+    path('materiais/editar/<int:pk>', MaterialUpdateView.as_view(), name='atualiza_material')
 ]

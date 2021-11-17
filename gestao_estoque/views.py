@@ -109,6 +109,7 @@ class MaterialUpdateView(UpdateView):
     template_name = 'atualiza.html'
     model = Materiais
     form_class = MaterialUpdateForm
+    success_url = reverse_lazy("materiais")
 
     def get_object(self, queryset=None):
       material = None
@@ -120,7 +121,7 @@ class MaterialUpdateView(UpdateView):
 
       if id is not None:
         # Busca o funcionario apartir do id
-        material = Materiais.objects.filter(id=id).first()
+        material = Materiais.objects.filter(id_material=id).first()
 
       elif slug is not None:        
         # Pega o campo slug do Model
@@ -137,6 +138,7 @@ class FuncionarioUpdateView(UpdateView):
     model = Pessoas
     fields = '__all__'
     context_object_name = 'funcionario'
+    success_url = reverse_lazy("materiais")
 
     def get_object(self, queryset=None):
       funcionario = None
