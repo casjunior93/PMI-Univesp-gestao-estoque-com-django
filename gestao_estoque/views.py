@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.forms.widgets import SelectDateWidget
-from .forms import MaterialForm, MovimentacaoForm
+from .forms import MaterialForm, MovimentacaoForm, FuncionarioForm, MaterialUpdateForm
 from django.db.models import F
 
 # Create your views here.
@@ -65,9 +65,8 @@ def situacao(request):
 class FuncionarioCreateView(CreateView):
     template_name = 'cadastro-funcionario.html'
     model = Pessoas
-    fields = ['nome_completo', 'funcao']
+    form_class = FuncionarioForm
     success_url = reverse_lazy("funcionarios")
-    template_name_suffix = '_cadastro_funcionario'
 
 
 class MaterialCreateView(CreateView):
@@ -92,14 +91,8 @@ class LoteCreateView(CreateView):
 class MovimentacaoCreateView(CreateView):
     template_name = 'cadastro-movimentacao.html'
     model = Movimentacao
-    fields = '__all__'
-    success_url = reverse_lazy("movimentacoes")
-    template_name_suffix = '_cadastro_movimentacao'
+    form_class = MovimentacaoForm
 
-    """ def post(self, *args, **kwargs):
-        lote_id = self.request.POST.get('id_lote')
-        obj = Lotes.objects.get(id_lote=lote_id)
-        Lotes.objects.filter(pk=obj.id_lote).update(quantidade=F('quantidade') + self.request.POST.get('quantidade')) """
     def form_valid(self, form):
         if form.is_valid():
             """ Salva movimentação e desconta na quantidade do lote """
@@ -115,8 +108,7 @@ class MovimentacaoCreateView(CreateView):
 class MaterialUpdateView(UpdateView):
     template_name = 'atualiza.html'
     model = Materiais
-    fields = '__all__'
-    context_object_name = 'material'
+    form_class = MaterialUpdateForm
 
     def get_object(self, queryset=None):
       material = None
@@ -139,7 +131,6 @@ class MaterialUpdateView(UpdateView):
 
       # Retorna o objeto encontrado
       return material
-    success_url = reverse_lazy("materiais")
 
 class FuncionarioUpdateView(UpdateView):
     template_name = "atualiza.html"
@@ -168,4 +159,3 @@ class FuncionarioUpdateView(UpdateView):
 
       # Retorna o objeto encontrado
       return funcionario
-    success_url = reverse_lazy("funcionarios")

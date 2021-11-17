@@ -2,13 +2,12 @@
 <div>
     <h1>Funcionários</h1>
 
-    <table>
-        <thead>
+    <table class="table">
+        <thead class="thead-light">
             <th>Nome</th>
             <th>ID</th>
             <th>Funcao</th>
             <th>Criado em</th>
-            <th>Editar</th>
         </thead>
         <tbody>
             {% for funcionario in funcionarios %}
@@ -17,7 +16,6 @@
                 <td>{{ funcionario.id_pessoa }}</td>
                 <td>{{ funcionario.funcao }}</td>
                 <td>{{funcionario.criado}}</td>
-                <td><a href="/funcionarios/editar/{{ funcionario.id_pessoa }}">Editar</a></td>
             </tr>
             {% endfor %}
         </tbody>

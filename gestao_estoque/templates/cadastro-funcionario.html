@@ -1,15 +1,20 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} {% block content %}
 <div>
     <h1>Cadastro de Funcionário</h1>
-    <form method="post" id="cadastro">
-        {% csrf_token %}
-        <div class="input">
-            <label for="{{ form.nome_completo.id_for_label }}">Nome completo</label> {{ form.nome_completo }}
+    <form method="POST" novalidate>
+        {% csrf_token %} {% for field in form.visible_fields %}
+        <div class="form-group {% if field.errors %} has-error {% endif%}">
+            <label for="{{ field.id_for_label }}">
+                {% if field.field.required %}
+                    <span class="required">{{ field.label }} </span>
+                {% else %}
+                    {{ field.label }}
+                {% endif %}
+                </label> {% render_field field class="form-control" %} {% for error in field.errors %}
+            <span class="text-muted">{{ error }}</span> {% endfor %}
         </div>
-        <div class="input">
-            <label for="{{ form.funcao.id_for_label }}">Função</label> {{ form.funcao }}
-        </div>
-        <button type="submit">Cadastrar</button>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
 {% endblock content %}
